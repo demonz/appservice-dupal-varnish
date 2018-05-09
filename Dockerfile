@@ -1,4 +1,4 @@
-FROM wodby/drupal-varnish:4.1
+FROM nbcwebcontainers.azurecr.io/wodby-drupal-varnish:4.1
 
 MAINTAINER Demonz Media <hello@demonzmedia.com>
 
