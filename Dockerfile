@@ -8,6 +8,7 @@ RUN apk add --update --no-cache --virtual .varnish-rundeps \
 
 
 COPY init_container.sh /bin/
+COPY sshd_config /etc/ssh/
 COPY stunnel.conf /etc/stunnel/
 
 

@@ -56,7 +56,6 @@ fi
 sed -i "s/{VARNISH_BACKEND_PORT}/${VARNISH_BACKEND_PORT}/g" /etc/stunnel/stunnel.conf
 sed -i "s/{STUNNEL_BACKEND_HOST}/${STUNNEL_BACKEND_HOST}/g" /etc/stunnel/stunnel.conf
 sed -i "s/{STUNNEL_BACKEND_PORT}/${STUNNEL_BACKEND_PORT}/g" /etc/stunnel/stunnel.conf
-
 /usr/bin/stunnel /etc/stunnel/stunnel.conf
 
 
