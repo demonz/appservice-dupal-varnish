@@ -133,8 +133,10 @@ sub vcl_recv {
 sub vcl_hash {
     hash_data(req.url);
 
-    if (req.http.host) {
+    if (req.http.X-Host) {
         hash_data(req.http.X-Host);
+    } else if (req.http.host) {
+        hash_data(req.http.host);
     } else {
         hash_data(server.ip);
     }
