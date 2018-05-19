@@ -34,8 +34,11 @@ COPY stunnel.conf /etc/stunnel/
 
 
 RUN set -ex; \
-    \
     chmod 755 /bin/init_container.sh
+
+
+ENV VARNISH_BACKEND_HOST='127.0.0.1' \
+  VARNISH_BACKEND_PORT='80'
 
 
 WORKDIR /home
