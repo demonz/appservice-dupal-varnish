@@ -24,7 +24,7 @@ sub vcl_recv {
     # In order for our set-up to work with Azure App Service, we need to replace host header with STUNNEL_BACKEND_HOST
     # - TODO: what about host header checks on the drupal side, e.g., Glen Street
     #
-    set req.http.X-Host = req.http.host;
+    set req.http.X-Forwarded-Host = req.http.host;
     set req.http.host = "{{ getenv "STUNNEL_BACKEND_HOST" }}";
 
 
@@ -133,8 +133,8 @@ sub vcl_recv {
 sub vcl_hash {
     hash_data(req.url);
 
-    if (req.http.X-Host) {
-        hash_data(req.http.X-Host);
+    if (req.http.X-Forwarded-Host) {
+        hash_data(req.http.X-Forwarded-Host);
     } else if (req.http.host) {
         hash_data(req.http.host);
     } else {
