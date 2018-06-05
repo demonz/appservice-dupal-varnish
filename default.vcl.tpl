@@ -19,13 +19,14 @@ sub vcl_recv {
     # Protecting against the HTTPOXY CGI vulnerability.
     unset req.http.proxy;
 
-
     #
-    # In order for our set-up to work with Azure App Service, we need to replace host header with STUNNEL_BACKEND_HOST
-    # - TODO: what about host header checks on the drupal side, e.g., Glen Street
+    # For our set-up to work with Azure App Service, we need to replace host header with STUNNEL_BACKEND_HOST
     #
     set req.http.X-Forwarded-Host = req.http.host;
     set req.http.host = "{{ getenv "STUNNEL_BACKEND_HOST" }}";
+
+    # Add Authorization header to request so Drupal-Apache will allow the req
+    set req.http.Authorization = "{{ getenv "VARNISH_BACKEND_AUTH" }}";
 
 
     if (req.method == "PURGE") {
