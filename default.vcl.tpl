@@ -13,6 +13,7 @@ backend default {
 
 {{ $exclude_urls := (getenv "VARNISH_EXCLUDE_URLS" "^(/update\\.php|/([a-z]{2}/)?admin|/([a-z]{2}/)?admin/.*|/([a-z]{2}/)?system/files/.*|/([a-z]{2}/)?flag/.*|.*/ajax/.*|.*/ahah/.*)$") }}
 
+
 # Respond to incoming requests.
 sub vcl_recv {
 

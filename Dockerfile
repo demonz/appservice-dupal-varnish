@@ -22,7 +22,8 @@ RUN set -ex; \
     # prepare run dir
     mkdir -p /var/run/sshd; \
     \
-    echo "root:Docker!" | chpasswd
+    # change root password to allow login via azure portal
+    echo "root:Docker!" | chpasswd;
 
 
 # override upstream default.vcl.tpl
