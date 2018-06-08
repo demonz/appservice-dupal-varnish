@@ -9,6 +9,14 @@ Supported tags and respective `Dockerfile` links:
 
 * `7.x-4.1`, `latest` [_(Dockerfile)_](./Dockerfile)
 
+
+## Building an image based on this repository
+
+    git clone git@github.com:demonz/appservice-dupal-varnish.git
+    cd appservice-drupal-varnish
+    ./build.sh
+
+
 ## Environment Variables
 
 | Variable                                   | Default Value              | Description                      |
