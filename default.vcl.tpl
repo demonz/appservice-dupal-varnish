@@ -26,9 +26,6 @@ sub vcl_recv {
     set req.http.X-Forwarded-Host = req.http.host;
     set req.http.host = "{{ getenv "STUNNEL_BACKEND_HOST" }}";
 
-    # Add Authorization header to request so Drupal-Apache will allow the req
-    set req.http.Authorization = "{{ getenv "VARNISH_BACKEND_AUTH" }}";
-
 
     if (req.method == "PURGE") {
         {{ if not (getenv "VARNISH_ALLOW_UNRESTRICTED_PURGE") }}
