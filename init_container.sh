@@ -66,7 +66,7 @@ process_templates() {
 check_varnish_secret
 process_templates
 
-exec-init-scripts.sh
+exec_init_scripts
 
 
 # execute CMD
