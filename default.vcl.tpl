@@ -29,6 +29,18 @@ sub vcl_recv {
     # Add Drupal shared secret header to request so Drupal-Apache will allow
     set req.http.X-Drupal-Secret = "{{ getenv "DRUPAL_SECRET" }}";
 
+    {{ if (getenv "REQUIRE_GATEWAY_IP") }}
+    # Pass through the health check path.
+    if (req.url ~ "^(/([a-z]{2}/)?health)$") {
+        return (pass);
+    }
+
+    # Verify X-Forwarded-For header contains the App Gateway IP
+    if (req.http.X-Forwarded-For !~ "({{ getenv "REQUIRE_GATEWAY_IP" }})") {
+        return (synth(403, "Forbidden"));
+    }
+    {{ end }}
+
 
     if (req.method == "PURGE") {
         {{ if not (getenv "VARNISH_ALLOW_UNRESTRICTED_PURGE") }}
